@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://xvwstw8vcwux"]
+
+[ext_resource type="PackedScene" uid="uid://hcq3muudqw16" path="res://player.tscn" id="1_bvkch"]
+[ext_resource type="Script" path="res://main.gd" id="1_h64j8"]
+[ext_resource type="PackedScene" uid="uid://1sowpwys1sf3" path="res://game_over.tscn" id="3_v6fab"]
+
+[sub_resource type="Gradient" id="Gradient_tda5r"]
+colors = PackedColorArray(0.48, 0.44744, 0.4272, 1, 0.3, 0.2149, 0.078, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6rxkc"]
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tcih4"]
+width = 1152
+height = 50
+color_ramp = SubResource("Gradient_tda5r")
+noise = SubResource("FastNoiseLite_6rxkc")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bywnc"]
+size = Vector2(1151, 50)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_h64j8")
+
+[node name="Player" parent="." instance=ExtResource("1_bvkch")]
+position = Vector2(303, 337)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="GroundTexture" type="Sprite2D" parent="Ground"]
+position = Vector2(578, 624)
+texture = SubResource("NoiseTexture2D_tcih4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(578, 624)
+shape = SubResource("RectangleShape2D_bywnc")
+
+[node name="GameOver" parent="." instance=ExtResource("3_v6fab")]
+
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="retry_pressed" from="GameOver" to="." method="_on_game_over_retry_pressed"]
