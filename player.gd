@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal player_died
 
-@export var SPEED = 0.0
+@export var SPEED = 400.0
 const JUMP_VELOCITY = -400.0
 const MAX_JUMP_CHARGE = 2.0
 var jump_charge = 0.0
@@ -28,7 +28,7 @@ func _physics_process(delta):
 	velocity.y += accel_y * delta
 		
 	if is_dead:
-		velocity.x = -400.0
+		velocity.x = 0.0
 	else:
 		$AnimatedSprite2D.speed_scale = -velocity.y * 0.004
 
@@ -57,6 +57,7 @@ func get_ready(startPosition):
 	position = startPosition
 	velocity.x = 0.0
 	velocity.y = 0.0
+	accel_y = 0.0
 	$AnimatedSprite2D.play('glide')
 	is_paused = true
 
