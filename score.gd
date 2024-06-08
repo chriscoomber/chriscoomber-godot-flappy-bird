@@ -1,12 +1,11 @@
 extends RichTextLabel
 
-var _score = 0
-var score:
+var score = 0:
 	get:
-		return _score
+		return score
 	set(value):
-		_score = value
-		text = str(_score)
+		score = value
+		text = str(score)
 
 func start():
 	$Timer.start()

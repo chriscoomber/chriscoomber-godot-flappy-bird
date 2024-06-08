@@ -22,7 +22,7 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 		
-	if is_on_floor():
+	if is_on_floor() or is_on_wall() or is_on_ceiling():
 		if not is_dead:
 			on_death()
 			is_dead = true
