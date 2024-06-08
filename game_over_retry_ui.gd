@@ -11,4 +11,5 @@ func _on_button_pressed():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if visible and Input.is_action_just_pressed("restart"):
+		retry_pressed.emit()

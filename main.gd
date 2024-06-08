@@ -5,7 +5,6 @@ var ground_scene
 var speed = 400.0
 var player_start_position
 var camera_start_position
-var ui_start_position
 var loaded_area_start_position
 var last_ground_offset = 0
 var ground_width = 578
@@ -16,35 +15,48 @@ var current_position = 0.0
 func _ready():
 	ground_scene_path = $Ground.scene_file_path
 	ground_scene = load(ground_scene_path)
-	$Ui.hide()
+	$UiLayer/GameOverRetryUi.hide()
 	player_start_position = $Player.position
 	camera_start_position = $Camera.position
-	ui_start_position = $Ui.position
 	loaded_area_start_position = $LoadedArea.position
+	$UiLayer/Score.start()
 
 func restart_game():
 	current_position = 0.0
 	last_ground_offset = 0
 	is_paused = true
-	$Ui.hide()
+	$UiLayer/GameOverRetryUi.hide()
 	$Player.get_ready(player_start_position)
 	$Camera.position = camera_start_position
-	$Ui.position = ui_start_position
 	$LoadedArea.position = loaded_area_start_position
+	$UiLayer/Score.score = 0
+	
 	await get_tree().create_timer(1.0).timeout
 	is_paused = false
 	$Player.go()
+	$UiLayer/Score.start()
 	
 func game_over():
 	print('game_over')
-	$Ui.show()
+	$UiLayer/Score.stop()
+	$UiLayer/GameOverRetryUi.set_score($UiLayer/Score.score)
+	$UiLayer/GameOverRetryUi.show()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Input.is_action_just_pressed("pause"):
+		if not is_paused:
+			is_paused = true
+			$UiLayer/Score.pause()
+			$Player.pause()
+		else:
+			is_paused = false
+			$UiLayer/Score.unpause()
+			$Player.unpause()
+	
 	if not is_paused:
 		current_position += delta * speed
 		$Camera.position.x += delta * speed
-		$Ui.position.x += delta * speed
 		$LoadedArea.position.x += delta * speed
 		maybe_spawn_ground()
 		

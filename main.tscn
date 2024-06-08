@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://xvwstw8vcwux"]
+[gd_scene load_steps=7 format=3 uid="uid://xvwstw8vcwux"]
 
 [ext_resource type="PackedScene" uid="uid://hcq3muudqw16" path="res://player.tscn" id="1_bvkch"]
 [ext_resource type="Script" path="res://main.gd" id="1_h64j8"]
 [ext_resource type="PackedScene" uid="uid://nwcja8reylsr" path="res://ground.tscn" id="3_43afu"]
-[ext_resource type="PackedScene" uid="uid://1sowpwys1sf3" path="res://ui.tscn" id="3_v6fab"]
+[ext_resource type="PackedScene" uid="uid://1sowpwys1sf3" path="res://game_over_retry_ui.tscn" id="3_v6fab"]
+[ext_resource type="PackedScene" uid="uid://o3qlu4gw1dm" path="res://score.tscn" id="5_2dkdl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtctg"]
 size = Vector2(4286, 2201)
@@ -13,8 +14,6 @@ script = ExtResource("1_h64j8")
 
 [node name="Player" parent="." instance=ExtResource("1_bvkch")]
 position = Vector2(303, 337)
-
-[node name="Ui" parent="." instance=ExtResource("3_v6fab")]
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(579, 325)
@@ -27,6 +26,12 @@ shape = SubResource("RectangleShape2D_dtctg")
 
 [node name="Ground" parent="." instance=ExtResource("3_43afu")]
 
+[node name="UiLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOverRetryUi" parent="UiLayer" instance=ExtResource("3_v6fab")]
+
+[node name="Score" parent="UiLayer" instance=ExtResource("5_2dkdl")]
+
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
-[connection signal="retry_pressed" from="Ui" to="." method="_on_game_over_retry_pressed"]
 [connection signal="body_exited" from="LoadedArea" to="." method="_on_loaded_area_body_exited"]
+[connection signal="retry_pressed" from="UiLayer/GameOverRetryUi" to="." method="_on_game_over_retry_pressed"]
