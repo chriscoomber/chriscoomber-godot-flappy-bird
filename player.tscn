@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://hcq3muudqw16"]
+[gd_scene load_steps=14 format=3 uid="uid://hcq3muudqw16"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_1orog"]
 [ext_resource type="Texture2D" uid="uid://c76rwtpu2y7bv" path="res://assets/player/Bird_0002.png" id="1_n47js"]
 [ext_resource type="Texture2D" uid="uid://bayop8wambgji" path="res://assets/player/Bird_0001.png" id="2_k4eni"]
+[ext_resource type="AudioStream" uid="uid://5dl1mgooy8c4" path="res://assets/audio/Death1.wav" id="4_sgare"]
+[ext_resource type="AudioStream" uid="uid://c2pisva5lsd25" path="res://assets/audio/Death2.wav" id="5_4nl38"]
+[ext_resource type="AudioStream" uid="uid://bnwevbcqps7nr" path="res://assets/audio/Flap1.wav" id="6_erjbt"]
+[ext_resource type="AudioStream" uid="uid://dvjhxqllqe7v7" path="res://assets/audio/Flap2.wav" id="7_lotkf"]
+[ext_resource type="AudioStream" uid="uid://blq3qivx5s1k7" path="res://assets/audio/Flap3.wav" id="8_vkpx3"]
+[ext_resource type="AudioStream" uid="uid://ctmb2in6tdhn" path="res://assets/audio/Flap4.wav" id="9_jej1s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h4shs"]
 animations = [{
@@ -38,6 +44,25 @@ animations = [{
 radius = 43.0
 height = 156.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0d17t"]
+streams_count = 2
+stream_0/stream = ExtResource("4_sgare")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_4nl38")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i3rd7"]
+random_pitch = 1.2
+streams_count = 4
+stream_0/stream = ExtResource("6_erjbt")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_lotkf")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("8_vkpx3")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("9_jej1s")
+stream_3/weight = 1.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1orog")
 
@@ -50,3 +75,11 @@ autoplay = "flap"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_c2oum")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_0d17t")
+volume_db = -20.0
+
+[node name="FlapSound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_i3rd7")
+volume_db = -20.0

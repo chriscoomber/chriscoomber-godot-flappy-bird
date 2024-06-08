@@ -47,6 +47,7 @@ func _physics_process(delta):
 			accel_y = 0.0
 			jump_charge = 0
 			$AnimatedSprite2D.play('flap')
+			$FlapSound.play()
 		elif velocity.y > 0.0 and $AnimatedSprite2D.animation == 'flap':
 			$AnimatedSprite2D.play('glide')
 
@@ -56,6 +57,7 @@ func _physics_process(delta):
 
 func on_death():
 	player_died.emit()
+	$DeathSound.play()
 	
 func get_ready(startPosition):
 	position = startPosition

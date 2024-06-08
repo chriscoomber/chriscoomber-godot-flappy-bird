@@ -8,6 +8,7 @@ func set_score(score):
 
 func _on_button_pressed():
 	retry_pressed.emit()
+	$Button/ButtonSound.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

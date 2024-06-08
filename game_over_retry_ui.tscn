@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://1sowpwys1sf3"]
+[gd_scene load_steps=3 format=3 uid="uid://1sowpwys1sf3"]
 
 [ext_resource type="Script" path="res://game_over_retry_ui.gd" id="1_mwvwk"]
+[ext_resource type="AudioStream" uid="uid://bqqymn0gokr8m" path="res://assets/audio/Button.wav" id="2_h88ie"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -19,6 +20,10 @@ offset_right = 667.0
 offset_bottom = 355.0
 theme_override_font_sizes/font_size = 40
 text = "Retry"
+
+[node name="ButtonSound" type="AudioStreamPlayer2D" parent="Button"]
+stream = ExtResource("2_h88ie")
+volume_db = -20.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
