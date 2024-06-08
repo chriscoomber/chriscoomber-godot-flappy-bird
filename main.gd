@@ -48,10 +48,12 @@ func _process(delta):
 		if not is_paused:
 			is_paused = true
 			$UiLayer/Score.pause()
+			$UiLayer/PauseScreen.show()
 			$Player.pause()
 		else:
 			is_paused = false
 			$UiLayer/Score.unpause()
+			$UiLayer/PauseScreen.hide()
 			$Player.unpause()
 	
 	if not is_paused:

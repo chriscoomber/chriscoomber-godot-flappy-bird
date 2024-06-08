@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://xvwstw8vcwux"]
+[gd_scene load_steps=8 format=3 uid="uid://xvwstw8vcwux"]
 
 [ext_resource type="PackedScene" uid="uid://hcq3muudqw16" path="res://player.tscn" id="1_bvkch"]
 [ext_resource type="Script" path="res://main.gd" id="1_h64j8"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtctg"]
 size = Vector2(4286, 2201)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxyuo"]
+bg_color = Color(0.6, 0.6, 0.6, 0.466667)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h64j8")
@@ -31,6 +34,13 @@ shape = SubResource("RectangleShape2D_dtctg")
 [node name="GameOverRetryUi" parent="UiLayer" instance=ExtResource("3_v6fab")]
 
 [node name="Score" parent="UiLayer" instance=ExtResource("5_2dkdl")]
+
+[node name="PauseScreen" type="RichTextLabel" parent="UiLayer"]
+visible = false
+offset_right = 1154.0
+offset_bottom = 599.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_hxyuo")
+text = "Paused"
 
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 [connection signal="body_exited" from="LoadedArea" to="." method="_on_loaded_area_body_exited"]
