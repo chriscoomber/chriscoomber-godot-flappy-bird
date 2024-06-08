@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://o3qlu4gw1dm" path="res://score.tscn" id="5_2dkdl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtctg"]
-size = Vector2(4286, 2201)
+size = Vector2(4286, 5036)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxyuo"]
 bg_color = Color(0.6, 0.6, 0.6, 0.466667)
@@ -25,7 +25,7 @@ position = Vector2(579, 325)
 [node name="LoadedArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LoadedArea"]
-position = Vector2(612, -243.5)
+position = Vector2(612, 102)
 shape = SubResource("RectangleShape2D_dtctg")
 
 [node name="Obstacle" parent="." instance=ExtResource("4_s7xov")]
