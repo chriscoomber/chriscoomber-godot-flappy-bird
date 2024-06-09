@@ -42,10 +42,10 @@ jobs:
         unzip templates.tpz
 
         # Create needed dirs
-        # Templates with godot 4 must be in ~/.local/share/godot/export_templates/${GODOT_VERSION}
-        mkdir -v -p ~/.local/share/godot/export_templates/${GODOT_VERSION}
+        # Templates with godot 4 must be in ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+        mkdir -v -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
         
-        mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}
+        mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
         mv godot/Godot* ${GITHUB_WORKSPACE}/godot.x86_64
 
         # Just cleaning
@@ -70,6 +70,7 @@ jobs:
       with:
         name: ${{ env.EXPORT_PRESET_NAME }}
         path: ${{ env.EXPORT_FOLDER }}
+        retention-days: 1
     
     - name: Deploy to GitHub Pages 🚀
       uses: JamesIves/github-pages-deploy-action@v4
