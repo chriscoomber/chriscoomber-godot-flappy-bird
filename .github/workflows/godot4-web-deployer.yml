@@ -11,9 +11,9 @@ permissions:
   contents: write
 
 env:
-  GODOT_MAJOR_VERSION: "4"
-  GODOT_MINOR_VERSION: "2"
-  GODOT_PATCH_VERSION: "2"
+  GODOT_VERSION: "4.2.2"
+  GODOT_EXECUTABLE_DOWNLOAD_URL: "https://downloads.tuxfamily.org/godotengine/4.2.2/Godot_v4.2.2-stable_linux.x86_64.zip"
+  GODOT_TEMPLATES_DOWNLOAD_URL: "https://downloads.tuxfamily.org/godotengine/4.2.2/Godot_v4.2.2-stable_export_templates.tpz"
 
   PROJECT_FOLDER: "." # the path to the godot project (must contain `project.godot` file) relative to the github root path
 
@@ -29,14 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Export Web Game
     steps:
-    - name: "Set environmental variables"
-      # If you have a custom godot you may want to modify the urls to download your own godot and templates
-      run: |
-        echo "GODOT_VERSION=${GODOT_MAJOR_VERSION}.${GODOT_MINOR_VERSION}.${GODOT_PATCH_VERSION}" >> $GITHUB_ENV
-
-        echo "GODOT_EXECUTABLE_DOWNLOAD_URL=https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip" >> $GITHUB_ENV
-        echo "GODOT_TEMPLATES_DOWNLOAD_URL=https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz" >> $GITHUB_ENV
-
     - name: Checkout
       uses: actions/checkout@v3
     
